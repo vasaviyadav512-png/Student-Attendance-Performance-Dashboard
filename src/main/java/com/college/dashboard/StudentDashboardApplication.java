@@ -21,13 +21,13 @@ public class StudentDashboardApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentDashboardApplication.class);
 
-    @Value("${app.datasource.url:${spring.datasource.url:jdbc:mysql://localhost:3306/eventdb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}}")
+    @Value("${app.datasource.url:${DB_URL:${spring.datasource.url:jdbc:mysql://localhost:3306/eventdb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}}}")
     private String dbUrl;
 
-    @Value("${app.datasource.username:${spring.datasource.username:eventapp}}")
+    @Value("${app.datasource.username:${DB_USERNAME:${spring.datasource.username:eventapp}}}")
     private String dbUser;
 
-    @Value("${app.datasource.password:${spring.datasource.password:EventApp@123}}")
+    @Value("${app.datasource.password:${DB_PASSWORD:${spring.datasource.password:EventApp@123}}}")
     private String dbPass;
 
     @Bean
