@@ -15,10 +15,10 @@ class StudentDashboardApplicationTests {
     @Test
     void normalizesRenderPostgresConnectionUrls() {
         assertEquals(
-                "jdbc:postgresql://user:pass@db.example.com:5432/app",
-                StudentDashboardApplication.normalizeJdbcUrl("postgres://user:pass@db.example.com:5432/app"));
+                "jdbc:postgresql://db.example.com:5432/app?sslmode=require",
+                StudentDashboardApplication.normalizeJdbcUrl("postgres://user:pass@db.example.com:5432/app?sslmode=require"));
         assertEquals(
-                "jdbc:postgresql://user:pass@db.example.com:5432/app",
+                "jdbc:postgresql://db.example.com:5432/app",
                 StudentDashboardApplication.normalizeJdbcUrl("postgresql://user:pass@db.example.com:5432/app"));
     }
 

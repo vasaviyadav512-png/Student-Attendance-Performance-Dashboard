@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
+import java.net.URI;
 import java.util.Map;
 
 /**
@@ -51,11 +52,22 @@ public class StudentDashboardApplication {
     }
 
     static String normalizeJdbcUrl(String url) {
-        if (url.startsWith("postgres://")) {
-            return "jdbc:postgresql://" + url.substring("postgres://".length());
-        }
-        if (url.startsWith("postgresql://")) {
-            return "jdbc:" + url;
+        if (url.startsWith("postgres://") || url.startsWith("postgresql://")) {
+            URI uri = URI.create(url);
+            String authority = uri.getRawAuthority();
+            int userInfoSeparator = authority.lastIndexOf('@');
+            if (userInfoSeparator >= 0) {
+                authority = authority.substring(userInfoSeparator + 1);
+            }
+
+            StringBuilder jdbcUrl = new StringBuilder("jdbc:postgresql://").append(authority);
+            if (uri.getRawPath() != null) {
+                jdbcUrl.append(uri.getRawPath());
+            }
+            if (uri.getRawQuery() != null) {
+                jdbcUrl.append('?').append(uri.getRawQuery());
+            }
+            return jdbcUrl.toString();
         }
         return url;
     }
