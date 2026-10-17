@@ -35,7 +35,13 @@ public class StudentDashboardApplication {
     public DataSource dataSource() {
         logger.info("Initializing DataSource for configured database as user: {}", dbUser);
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(normalizeJdbcUrl(dbUrl));
+        String jdbcUrl = normalizeJdbcUrl(dbUrl);
+        config.setJdbcUrl(jdbcUrl);
+        if (jdbcUrl.startsWith("jdbc:postgresql:")) {
+            config.setDriverClassName("org.postgresql.Driver");
+        } else if (jdbcUrl.startsWith("jdbc:mysql:")) {
+            config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        }
         config.setUsername(dbUser);
         config.setPassword(dbPass);
         config.setMaximumPoolSize(10);
