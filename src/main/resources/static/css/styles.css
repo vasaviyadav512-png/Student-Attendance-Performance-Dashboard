@@ -1,0 +1,475 @@
+/* =========================================================
+   Student Attendance & Performance Dashboard - Stylesheet
+   Professional Modern College Management Theme
+   ========================================================= */
+
+:root {
+    --primary-color: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #6366f1;
+    --sidebar-bg: #0f172a;
+    --sidebar-hover: #1e293b;
+    --sidebar-active: #2563eb;
+    --body-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #06b6d4;
+    --transition-speed: 0.25s;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    background-color: var(--body-bg);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* ---------------------------------------------------------
+   Sidebar Navigation
+   --------------------------------------------------------- */
+#sidebar {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--sidebar-bg);
+    color: #fff;
+    z-index: 1040;
+    transition: all var(--transition-speed) ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar .brand {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#sidebar .brand i {
+    font-size: 1.5rem;
+    color: #60a5fa;
+}
+
+#sidebar .nav-links {
+    list-style: none;
+    padding: 1rem 0.75rem;
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#sidebar .nav-item {
+    margin-bottom: 0.35rem;
+}
+
+#sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.75rem 1rem;
+    color: #94a3b8;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+}
+
+#sidebar .nav-link:hover {
+    color: #fff;
+    background-color: var(--sidebar-hover);
+}
+
+#sidebar .nav-link.active {
+    color: #fff;
+    background-color: var(--sidebar-active);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+#sidebar .nav-link i {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+#sidebar .user-info {
+    padding: 1rem 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#sidebar .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #3b82f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+}
+
+/* ---------------------------------------------------------
+   Main Content Area
+   --------------------------------------------------------- */
+#main-content {
+    margin-left: 260px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left var(--transition-speed) ease-in-out;
+}
+
+/* Top Navbar */
+.top-navbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.85rem 1.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.top-navbar .page-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.content-body {
+    padding: 1.75rem;
+    flex-grow: 1;
+}
+
+/* ---------------------------------------------------------
+   Summary Stat Cards
+   --------------------------------------------------------- */
+.stat-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.35rem 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card .stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.stat-card.blue .stat-icon { background: #eff6ff; color: #2563eb; }
+.stat-card.green .stat-icon { background: #ecfdf5; color: #10b981; }
+.stat-card.purple .stat-icon { background: #f5f3ff; color: #7c3aed; }
+.stat-card.red .stat-icon { background: #fef2f2; color: #ef4444; }
+
+.stat-card .stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
+}
+
+.stat-card .stat-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* ---------------------------------------------------------
+   Cards & Data Tables
+   --------------------------------------------------------- */
+.content-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.content-card .card-header-custom {
+    padding: 1rem 1.5rem;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-card .card-header-custom h5 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.table-custom {
+    margin-bottom: 0;
+}
+
+.table-custom thead th {
+    background-color: #f8fafc;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.825rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-color);
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+}
+
+.table-custom tbody td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+    font-size: 0.925rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table-custom tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* ---------------------------------------------------------
+   Badges & Indicators
+   --------------------------------------------------------- */
+.badge-role {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.badge-present {
+    background-color: #d1fae5;
+    color: #065f46;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+}
+
+.badge-absent {
+    background-color: #fee2e2;
+    color: #991b1b;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+}
+
+.badge-risk {
+    background-color: #fee2e2;
+    color: #dc2626;
+    font-weight: 600;
+    padding: 0.35rem 0.65rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.badge-good {
+    background-color: #ecfdf5;
+    color: #059669;
+    font-weight: 600;
+    padding: 0.35rem 0.65rem;
+    border-radius: 6px;
+}
+
+/* Grade Badges */
+.badge-grade-a { background: #dcfce7; color: #15803d; font-weight: 700; }
+.badge-grade-b { background: #e0f2fe; color: #0369a1; font-weight: 700; }
+.badge-grade-c { background: #fef9c3; color: #a16207; font-weight: 700; }
+.badge-grade-d { background: #ffedd5; color: #c2410c; font-weight: 700; }
+.badge-grade-f { background: #fee2e2; color: #b91c1c; font-weight: 700; }
+
+/* ---------------------------------------------------------
+   Attendance Marking Switch / Radio
+   --------------------------------------------------------- */
+.attendance-toggle {
+    display: inline-flex;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.attendance-toggle input[type="radio"] {
+    display: none;
+}
+
+.attendance-toggle label {
+    padding: 0.35rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.attendance-toggle input[value="PRESENT"]:checked + label {
+    background-color: #10b981;
+    color: white;
+}
+
+.attendance-toggle input[value="ABSENT"]:checked + label {
+    background-color: #ef4444;
+    color: white;
+}
+
+/* ---------------------------------------------------------
+   Printable Report Card Styles
+   --------------------------------------------------------- */
+.report-paper {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.report-header {
+    text-align: center;
+    border-bottom: 2px solid #0f172a;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.report-header h2 {
+    margin: 0;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: 0.5px;
+}
+
+.report-header p {
+    margin: 0.35rem 0 0 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.report-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    background: #f8fafc;
+    padding: 1.25rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.report-meta-item {
+    font-size: 0.95rem;
+}
+
+.report-meta-item strong {
+    color: #334155;
+    margin-right: 0.5rem;
+}
+
+.report-signatures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3.5rem;
+    padding-top: 1rem;
+}
+
+.signature-line {
+    width: 200px;
+    text-align: center;
+    border-top: 1px solid #475569;
+    padding-top: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+/* Print Media Query */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    #sidebar, .top-navbar, .no-print, .btn, .modal, .toast-container {
+        display: none !important;
+    }
+    #main-content {
+        margin-left: 0 !important;
+        padding: 0 !important;
+    }
+    .content-body {
+        padding: 0 !important;
+    }
+    .report-paper {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+    .report-meta-grid {
+        background: #ffffff !important;
+        border: 1px solid #000 !important;
+    }
+    table {
+        border-collapse: collapse !important;
+    }
+    th, td {
+        border: 1px solid #000000 !important;
+    }
+}
+
+/* ---------------------------------------------------------
+   Responsive adjustments
+   --------------------------------------------------------- */
+@media (max-width: 991.98px) {
+    #sidebar {
+        margin-left: -260px;
+    }
+    #sidebar.show {
+        margin-left: 0;
+    }
+    #main-content {
+        margin-left: 0;
+    }
+}
