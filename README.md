@@ -189,6 +189,17 @@ Open your browser and navigate to:
 http://localhost:8080
 ```
 
+## Deploy to Render
+
+The repository includes a Render Blueprint that creates the Docker web service and its PostgreSQL database:
+
+1. Push the repository to GitHub.
+2. In the Render Dashboard, choose **New > Blueprint** and connect this repository.
+3. Select the `main` branch and apply the Blueprint from `render.yaml`.
+4. Open the deployed service URL after the first deploy completes.
+
+The Blueprint uses Render's free plans for a demo deployment. Free database storage is temporary, so choose a paid PostgreSQL plan in Render before relying on it for persistent student records. The generated `JWT_SECRET` is managed by Render; do not replace it with a public or committed secret.
+
 ---
 
 ## 🔑 Demo Login Credentials

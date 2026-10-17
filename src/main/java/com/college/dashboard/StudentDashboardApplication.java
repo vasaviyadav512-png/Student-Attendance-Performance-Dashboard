@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
+import java.util.Map;
 
 /**
  * Main Entry Point for Student Attendance & Performance Dashboard Application.
@@ -32,16 +33,25 @@ public class StudentDashboardApplication {
     @Bean
     @Primary
     public DataSource dataSource() {
-        logger.info("Initializing DataSource connecting to: {} as user: {}", dbUrl, dbUser);
+        logger.info("Initializing DataSource for configured database as user: {}", dbUser);
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(dbUrl);
+        config.setJdbcUrl(normalizeJdbcUrl(dbUrl));
         config.setUsername(dbUser);
         config.setPassword(dbPass);
-        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         config.setMaximumPoolSize(10);
         config.setMinimumIdle(2);
         config.setConnectionTimeout(20000);
         return new HikariDataSource(config);
+    }
+
+    static String normalizeJdbcUrl(String url) {
+        if (url.startsWith("postgres://")) {
+            return "jdbc:postgresql://" + url.substring("postgres://".length());
+        }
+        if (url.startsWith("postgresql://")) {
+            return "jdbc:" + url;
+        }
+        return url;
     }
 
     public static void main(String[] args) {
@@ -51,10 +61,12 @@ public class StudentDashboardApplication {
             System.setProperty("spring.datasource.password", "EventApp@123");
             System.setProperty("app.datasource.password", "EventApp@123");
         }
-        SpringApplication.run(StudentDashboardApplication.class, args);
+        SpringApplication application = new SpringApplication(StudentDashboardApplication.class);
+        application.setDefaultProperties(Map.of("server.port", System.getenv().getOrDefault("PORT", "8080")));
+        application.run(args);
         System.out.println("==================================================================");
         System.out.println("🚀 Student Attendance & Performance Dashboard is RUNNING!");
-        System.out.println("🌐 Open in your browser: http://localhost:8080");
+        System.out.println("🌐 Open in your browser: http://localhost:" + System.getenv().getOrDefault("PORT", "8080"));
         System.out.println("🔐 Demo Admin Login:   admin   / admin123");
         System.out.println("🔐 Demo Teacher Login: teacher / teacher123");
         System.out.println("==================================================================");
